@@ -7,6 +7,8 @@ from django.template.loader import render_to_string
 
 
 def cart_add(request):
+    if not request.session.session_key:
+        request.session.create()
     product_id = request.POST.get("product_id")
     product = Products.objects.get(id=product_id)
 
@@ -20,6 +22,21 @@ def cart_add(request):
                 cart.save()
         else:
             Cart.objects.create(user=request.user, product=product, quantity=1)
+
+    else:
+        carts = Cart.objects.filter(
+            session_key=request.session.session_key, product=product
+        )
+
+        if carts.exists():
+            cart = carts.first()
+            if cart:
+                cart.quantity += 1
+                cart.save()
+            else:
+                Cart.objects.create(
+                    session_key=request.session.session_key, product=product, quantity=1
+                )
 
     user_cart = get_user_carts(request)
 
