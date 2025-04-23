@@ -2,12 +2,14 @@ from django.contrib import messages
 from django.forms import ValidationError
 from django.shortcuts import render, redirect
 from django.db import transaction
-
+from django.contrib.auth.decorators import login_required
 from carts.models import Cart
+import orders
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
 
 
+@login_required
 # Create your views here.
 def create_order(request):
     if request.method == "POST":
@@ -70,6 +72,7 @@ def create_order(request):
     context = {
         "title": "Home - оформление заказа",
         "form": form,
+        "order": True,
     }
 
     return render(request, "orders/create_order.html", context=context)

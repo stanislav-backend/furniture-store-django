@@ -19,7 +19,7 @@
         <h3 class="text-center">Детали заказа</h3>
         <div class="card mb-3">
             <div class="card-body">
-                <<form action="{% url 'orders:create_order' %}" method="post">
+                <form action="{% url 'orders:create_order' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 mb-3">

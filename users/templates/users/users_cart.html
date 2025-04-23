@@ -15,11 +15,11 @@
                     {% include "carts/includes/included_cart.html" %}
                     <!-- Закончилась разметка корзины -->
                 </div>
-                {% if carts %}
+                {% comment %} {% if carts %}
                 <a class="btn btn-dark" href="orders/create_order.html">
                     Оформить заказ
                 </a>
-            {% endif %}
+            {% endif %} {% endcomment %}
             </div>
         </div>
     </div>
