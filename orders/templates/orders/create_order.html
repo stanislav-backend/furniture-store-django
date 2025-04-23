@@ -19,7 +19,7 @@
         <h3 class="text-center">Детали заказа</h3>
         <div class="card mb-3">
             <div class="card-body">
-                <form action="{% url "orders:create_order" %}" methog="post">
+                <<form action="{% url 'orders:create_order' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -87,6 +87,9 @@
                                     id="id_payment_on_get" value="1">
                                 <label class="form-check-label" for="id_payment_on_get">Наличными/картой
                                     при плучении</label>
+                                    {% if form.payment_on_get.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show">{{form.payment_on_get.errors}}</div>
+                                    {% endif %}
                             </div>
                         </div>
                     </div>
